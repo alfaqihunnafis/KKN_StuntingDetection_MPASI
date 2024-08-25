@@ -7,47 +7,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <nav>
-        <h2>StuntingAlert!</h2>
-    </nav>
-    <div class="container">
-        <div class="form-title">Input Data Balita</div>
-        <form>
-            <div class="form-group">
-                <label>Jenis Kelamin</label>
-                <input type="radio" name="gender" value="laki-laki" id="male">
-                <label for="male">Laki-laki</label>
-                <input type="radio" name="gender" value="perempuan" id="female">
-                <label for="female">Perempuan</label>
-            </div>
-            <div class="form-group">
-                <label>Umur</label>
-                <input type="number">
-                <span class="unit">bulan</span>
-            </div>
-            <div class="form-group">
-                <label>Berat Bayi</label>
-                <input type="number">
-                <span class="unit">kg</span>
-            </div>
-            <div class="form-group">
-                <label>Panjang Bayi</label>
-                <input type="number">
-                <span class="unit">cm</span>
-            </div>
-            <div class="form-group">
-                <label>Berat Badan</label>
-                <input type="number">
-                <span class="unit">kg</span>
-            </div>
-            <div class="form-group">
-                <label>Tinggi Badan</label>
-                <input type="number">
-                <span class="unit">cm</span>
-            </div>
-            
-            <button type="submit">Prediksi</button>
-        </form>
+    <div class="container content">
+        <h1>Selamat Datang di Deteksi
+        <em>Stunting</em> pada Balita</h1>
+        <p>Silahkan pilih opsi deteksi:</p>
+        <div class="option-buttons">
+            <a href="{{ url_for('individu') }}" class="button">Deteksi Individu</a>
+            <a href="{{ url_for('kelompok') }}" class="button">Deteksi Kelompok (CSV)</a>
+        </div>
     </div>
 </body>
 </html>

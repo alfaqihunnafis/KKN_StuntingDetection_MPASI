@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StuntingAlert!</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+            </svg> Kembali
+        </a>
+        <div class="form-title">Unggah CSV untuk Prediksi Kelompok</div>
+        <form action="{{ url_for('prediksi_csv') }}" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file">Unggah berkas CSV:</label>
+                <input type="file" name="file" id="file" accept=".csv" required>
+            </div>
+            <button type="submit">Prediksi</button>
+        </form>
+        {% if hasil_prediksi %}
+            <h3>Hasil Prediksi Kelompok:</h3>
+            <ul>
+                {% for hasil in hasil_prediksi %}
+                    <li>{{ hasil }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</body>
+</html>

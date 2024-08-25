@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StuntingAlert!</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+            </svg> Kembali
+        </a>
+        <div class="form-title">Input Data Balita</div>
+        <form action="{{ url_for('prediksi') }}" method="POST">
+            <div class="form-group">
+                <label for="jenis_kelamin">Jenis Kelamin</label>
+                <div>
+                    <input type="radio" id="laki-laki" name="jenis_kelamin" value="1" required>
+                    <label for="laki-laki">Laki-Laki</label>
+                </div>
+                <div>
+                    <input type="radio" id="perempuan" name="jenis_kelamin" value="0" required>
+                    <label for="perempuan">Perempuan</label>
+                </div>
+            </div>                    
+            <div class="form-group">
+                <label for="umur">Umur</label>
+                <input type="number" name="umur" id="umur" placeholder="bulan" required>
+                <span class="unit">bulan</span>
+            </div>
+            <div class="form-group">
+                <label for="berat_bayi">Berat Bayi</label>
+                <input type="number" step="any" name="berat_bayi" id="berat_bayi" placeholder="kg" required>
+                <span class="unit">kg</span>
+            </div>
+            <div class="form-group">
+                <label for="panjang_bayi">Panjang Bayi</label>
+                <input type="number" step="any" name="panjang_bayi" id="panjang_bayi" placeholder="cm" required>
+                <span class="unit">cm</span>
+            </div>
+            <div class="form-group">
+                <label for="berat_badan">Berat Badan</label>
+                <input type="number" step="any" name="berat_badan" id="berat_badan" placeholder="kg" required>
+                <span class="unit">kg</span>
+            </div>
+            <div class="form-group">
+                <label for="tinggi_badan">Tinggi Badan</label>
+                <input type="number" step="any" name="tinggi_badan" id="tinggi_badan" placeholder="cm" required>
+                <span class="unit">cm</span>
+            </div>
+            
+            <button type="submit">Prediksi</button>
+        </form>
+        {% if prediksi_text %}
+            <p class="hasil">{{ prediksi_text }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
