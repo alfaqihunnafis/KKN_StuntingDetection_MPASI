@@ -13,18 +13,18 @@
               <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
             </svg> Kembali
         </a>
-        <div class="form-title">Unggah CSV untuk Prediksi Kelompok</div>
-        <form action="{{ url_for('prediksi_csv') }}" method="POST" enctype="multipart/form-data">
+        <div class="form-title">Unggah CSV untuk Deteksi Kelompok</div>
+        <form action="{{ url_for('deteksi_csv') }}" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="file">Unggah berkas CSV:</label>
                 <input type="file" name="file" id="file" accept=".csv" required>
             </div>
-            <button type="submit">Prediksi</button>
+            <button type="submit">Deteksi</button>
         </form>
-        {% if hasil_prediksi %}
-            <h3>Hasil Prediksi Kelompok:</h3>
+        {% if hasil_deteksi %}
+            <h3>Hasil Deteksi Kelompok:</h3>
             <ul>
-                {% for hasil in hasil_prediksi %}
+                {% for hasil in hasil_deteksi %}
                     <li>{{ hasil }}</li>
                 {% endfor %}
             </ul>

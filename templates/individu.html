@@ -14,7 +14,7 @@
             </svg> Kembali
         </a>
         <div class="form-title">Input Data Balita</div>
-        <form action="{{ url_for('prediksi') }}" method="POST">
+        <form action="{{ url_for('deteksi_individu') }}" method="POST">
             <div class="form-group">
                 <label for="jenis_kelamin">Jenis Kelamin</label>
                 <div>
@@ -52,10 +52,10 @@
                 <span class="unit">cm</span>
             </div>
             
-            <button type="submit">Prediksi</button>
+            <button type="submit">Deteksi</button>
         </form>
-        {% if prediksi_text %}
-            <p class="hasil">{{ prediksi_text }}</p>
+        {% if deteksi_text %}
+            <p class="hasil">{{ deteksi_text }}</p>
         {% endif %}
     </div>
 </body>

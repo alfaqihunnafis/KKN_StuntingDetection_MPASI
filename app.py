@@ -21,8 +21,8 @@ def individu():
 def kelompok():
     return render_template('kelompok.html')
 
-@app.route('/prediksi', methods=['POST'])
-def prediksi():
+@app.route('/deteksi_individu', methods=['POST'])
+def deteksi_individu():
     if request.method == 'POST':
         try:
             # Ambil data dari form
@@ -36,25 +36,25 @@ def prediksi():
             # Buat array numpy
             data = np.array([[jenis_kelamin, umur, berat_bayi, panjang_bayi, berat_badan, tinggi_badan]])
             
-            # Lakukan prediksi
+            # Lakukan deteksi
             prediction = model.predict(data)
-            # Tentukan output berdasarkan prediksi
+            # Tentukan output berdasarkan deteksi
             if prediction[0] == 1:
                 output = 'Anak Mengalami Stunting'
             else:
                 output = 'Anak Tidak Mengalami Stunting'
             
-            return render_template('individu.html', prediksi_text=f'Hasil: {output}')
+            return render_template('individu.html', deteksi_text=f'Hasil: {output}')
         except Exception as e:
-            return render_template('individu.html', prediksi_text=f'Error: {str(e)}')
+            return render_template('individu.html', deteksi_text=f'Error: {str(e)}')
     return render_template('individu.html')
 
-@app.route('/prediksi_csv', methods=['POST'])
-def prediksi_csv():
+@app.route('/deteksi_csv', methods=['POST'])
+def deteksi_csv():
     if request.method == 'POST':
         file = request.files['file']
         if not file:
-            return render_template('kelompok.html', hasil_prediksi=['Tidak ada file yang diupload'])
+            return render_template('kelompok.html', hasil_deteksi=['Tidak ada file yang diupload'])
 
         try:
             data = pd.read_csv(file, sep=',')
@@ -64,19 +64,19 @@ def prediksi_csv():
             
             # Pastikan semua kolom ada
             if not all(col in data.columns for col in expected_columns):
-                return render_template('kelompok.html', hasil_prediksi=['CSV harus mengikuti format: Jenis Kelamin, Umur (bulan), Berat Bayi (kg), Panjang Bayi (cm), Berat Badan (kg), Tinggi Badan (cm)'])
+                return render_template('kelompok.html', hasil_deteksi=['CSV harus mengikuti format: Jenis Kelamin, Umur (bulan), Berat Bayi (kg), Panjang Bayi (cm), Berat Badan (kg), Tinggi Badan (cm)'])
 
             # Pilih hanya kolom yang dibutuhkan
             data = data[expected_columns]
             
-            # Lakukan prediksi
+            # Lakukan deteksi
             predictions = model.predict(data)
             results = ['Anak Mengalami Stunting' if pred == 1 else 'Anak Tidak Mengalami Stunting' for pred in predictions]
 
-            return render_template('kelompok.html', hasil_prediksi=results)
+            return render_template('kelompok.html', hasil_deteksi=results)
 
         except Exception as e:
-            return render_template('kelompok.html', hasil_prediksi=[f'Error processing file: {str(e)}'])
+            return render_template('kelompok.html', hasil_deteksi=[f'Error processing file: {str(e)}'])
 
 if __name__ == '__main__':
     app.run(debug=True)
