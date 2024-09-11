@@ -167,8 +167,7 @@ a {
     }
 
     .option-buttons .button {
-        width: 100%; 
-        max-width: none; 
+        width: 86%; 
     }
 }
 
