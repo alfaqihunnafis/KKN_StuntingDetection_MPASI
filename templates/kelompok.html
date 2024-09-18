@@ -21,13 +21,21 @@
             </div>
             <button type="submit">Deteksi</button>
         </form>
-        {% if hasil_deteksi %}
-            <h3>Hasil Deteksi Kelompok:</h3>
-            <ul>
-                {% for hasil in hasil_deteksi %}
-                    <li>{{ hasil }}</li>
-                {% endfor %}
-            </ul>
+
+        <!-- Menampilkan pesan flash jika ada -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="alert">
+              {% for category, message in messages %}
+                <p class="alert-{{ category }}">{{ message }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <!-- Tombol untuk mengunduh CSV hasil prediksi jika tersedia -->
+        {% if csv_available %}
+            <a href="{{ url_for('download_csv') }}" class="button download-btn">Unduh Hasil Prediksi CSV</a>
         {% endif %}
     </div>
 </body>
