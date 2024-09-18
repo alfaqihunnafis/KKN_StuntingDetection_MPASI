@@ -1,13 +1,19 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file, flash
 import pickle
 import numpy as np
 import pandas as pd
+from io import BytesIO
+import os
 
 app = Flask(__name__)
+app.secret_key = os.urandom(24)  # Set secret key untuk sesi dan flash messages
 
 # Muat model pengklasifikasi stunting
 filename = 'model/modelRF.pkl'
 model = pickle.load(open(filename, 'rb'))
+
+# Variabel global untuk menyimpan hasil prediksi
+csv_output = None
 
 @app.route('/')
 def index():
@@ -51,32 +57,63 @@ def deteksi_individu():
 
 @app.route('/deteksi_csv', methods=['POST'])
 def deteksi_csv():
+    global csv_output  # Menggunakan variabel global untuk menyimpan output CSV
+    
     if request.method == 'POST':
         file = request.files['file']
         if not file:
-            return render_template('kelompok.html', hasil_deteksi=['Tidak ada file yang diupload'])
+            flash('Tidak ada file yang diupload!', 'error')
+            return render_template('kelompok.html', csv_available=False)
 
         try:
             data = pd.read_csv(file, sep=',')
             
-            # Kolom di file CSV
+            # Cek jika file kosong
+            if data.empty:
+                flash('File CSV kosong. Mohon unggah file yang berisi data.', 'error')
+                return render_template('kelompok.html', csv_available=False)
+
+            # Kolom yang diharapkan di file CSV
             expected_columns = ['Jenis Kelamin','Umur (bulan)','Berat Bayi (kg)','Panjang Bayi (cm)','Berat Badan (kg)','Tinggi Badan (cm)']
             
-            # Pastikan semua kolom ada
+            # Memastikan semua kolom ada
             if not all(col in data.columns for col in expected_columns):
-                return render_template('kelompok.html', hasil_deteksi=['CSV harus mengikuti format: Jenis Kelamin, Umur (bulan), Berat Bayi (kg), Panjang Bayi (cm), Berat Badan (kg), Tinggi Badan (cm)'])
+                flash('Format CSV tidak sesuai. Harus mengandung kolom: Jenis Kelamin, Umur (bulan), Berat Bayi (kg), Panjang Bayi (cm), Berat Badan (kg), Tinggi Badan (cm).', 'error')
+                return render_template('kelompok.html', csv_available=False)
 
-            # Pilih hanya kolom yang dibutuhkan
+            # Memilih kolom yang dibutuhkan
             data = data[expected_columns]
             
-            # Lakukan deteksi
+            # Melakukan deteksi
             predictions = model.predict(data)
-            results = ['Anak Mengalami Stunting' if pred == 1 else 'Anak Tidak Mengalami Stunting' for pred in predictions]
+            data['Prediksi Stunting'] = ['Anak Mengalami Stunting' if pred == 1 else 'Anak Tidak Mengalami Stunting' for pred in predictions]
 
-            return render_template('kelompok.html', hasil_deteksi=results)
+            # Menyimpan hasil prediksi ke dalam file CSV di memori
+            output = BytesIO()  # Menggunakan BytesIO untuk mode biner
+            data.to_csv(output, index=False)
+            output.seek(0)  # Mengembalikan posisi file ke awal
+            csv_output = output  # Menyimpan hasil CSV ke variabel global
+
+            # Mengembalikan ke halaman dengan tombol unduhan aktif
+            return render_template('kelompok.html', csv_available=True)
+
+        except pd.errors.EmptyDataError:
+            flash('File CSV kosong atau tidak valid. Mohon unggah file yang benar.', 'error')
+            return render_template('kelompok.html', csv_available=False)
 
         except Exception as e:
-            return render_template('kelompok.html', hasil_deteksi=[f'Error processing file: {str(e)}'])
+            flash(f'Terjadi kesalahan: {str(e)}', 'error')
+            return render_template('kelompok.html', csv_available=False)
+
+@app.route('/download_csv')
+def download_csv():
+    global csv_output  # Menggunakan variabel global csv_output
+    
+    if csv_output is None:
+        return "Tidak ada hasil prediksi untuk diunduh.", 400
+
+    # Mengirim file CSV untuk diunduh
+    return send_file(csv_output, mimetype='text/csv', download_name='hasil_prediksi_stunting.csv', as_attachment=True)
 
 if __name__ == '__main__':
     app.run(debug=True)
