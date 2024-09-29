@@ -33,14 +33,17 @@ Ensure you have Python installed. Install the required Python packages using `pi
 pip install -r requirements.txt
 ```
 The `requirements.txt` file includes dependencies like Flask, Pandas, NumPy, and scikit-learn.
+
 3. Model Setup
 Make sure you have the pre-trained Random Forest model file (`modelRF.pkl`) in the `model/` directory. If you don’t have the model file, you will need to train one and save it as `modelRF.pkl` in the appropriate directory.
+
 4. Running the Application
 To start the Flask application, run the following command in the project directory:
 ```bash
 python app.py
 ```
 By default, the application will run on `http://127.0.0.1:5000/`. Open a browser and navigate to this address to start using the web interface.
+
 5. Uploading CSV for Group Prediction
 Ensure that your CSV file follows the correct format with columns:
 
