@@ -1,6 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Lora:700,700italic);
 
-/* Default Styles */
 html {
     margin: 0;
     padding: 0;
@@ -92,7 +91,8 @@ input[type="radio"] {
     font-weight: bold;
 }
 
-button, .button {
+.button, button {
+    font-family: 'Lora', sans-serif;
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
