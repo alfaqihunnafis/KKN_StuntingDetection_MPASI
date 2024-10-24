@@ -6,8 +6,10 @@ from io import BytesIO
 from dotenv import load_dotenv
 import os
 
+load_dotenv()  # Memuat variabel dari .env
+
 app = Flask(__name__)
-app.secret_key = os.getenv('SECRET_KEY', 'fallback-secret-key')
+app.secret_key = os.getenv('SECRET_KEY')
 
 # Muat model pengklasifikasi stunting
 filename = 'model/best_model_90.pkl'
