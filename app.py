@@ -3,13 +3,14 @@ import pickle
 import numpy as np
 import pandas as pd
 from io import BytesIO
+from dotenv import load_dotenv
 import os
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)  # Set secret key untuk sesi dan flash messages
+app.secret_key = os.getenv('SECRET_KEY', 'fallback-secret-key')
 
 # Muat model pengklasifikasi stunting
-filename = 'model/modelRF.pkl'
+filename = 'model/best_model_90.pkl'
 model = pickle.load(open(filename, 'rb'))
 
 # Variabel global untuk menyimpan hasil prediksi
@@ -31,7 +32,7 @@ def kelompok():
 def deteksi_individu():
     if request.method == 'POST':
         try:
-            # Ambil data dari form
+            # Mengambil data dari form
             jenis_kelamin = int(request.form['jenis_kelamin'])
             umur = int(request.form['umur'])
             berat_bayi = float(request.form['berat_bayi'])
@@ -39,18 +40,19 @@ def deteksi_individu():
             berat_badan = float(request.form['berat_badan'])
             tinggi_badan = float(request.form['tinggi_badan'])
             
-            # Buat array numpy
+            # Membuat array numpy
             data = np.array([[jenis_kelamin, umur, berat_bayi, panjang_bayi, berat_badan, tinggi_badan]])
             
-            # Lakukan deteksi
+            # Melakukan deteksi
             prediction = model.predict(data)
-            # Tentukan output berdasarkan deteksi
+            
+            # Menentukan output berdasarkan deteksi
             if prediction[0] == 1:
                 output = 'Anak Mengalami Stunting'
             else:
                 output = 'Anak Tidak Mengalami Stunting'
             
-            return render_template('individu.html', deteksi_text=f'Hasil: {output}')
+            return render_template('individu.html', deteksi_text=f'Prediksi: {output}')
         except Exception as e:
             return render_template('individu.html', deteksi_text=f'Error: {str(e)}')
     return render_template('individu.html')
@@ -66,19 +68,20 @@ def deteksi_csv():
             return render_template('kelompok.html', csv_available=False)
 
         try:
+            # Membaca file CSV
             data = pd.read_csv(file, sep=',')
             
-            # Cek jika file kosong
+            # Cek jika data kosong setelah dibaca
             if data.empty:
                 flash('File CSV kosong. Mohon unggah file yang berisi data.', 'error')
                 return render_template('kelompok.html', csv_available=False)
 
             # Kolom yang diharapkan di file CSV
-            expected_columns = ['Jenis Kelamin','Umur (bulan)','Berat Bayi (kg)','Panjang Bayi (cm)','Berat Badan (kg)','Tinggi Badan (cm)']
+            expected_columns = ['Jenis Kelamin','Umur','Berat Bayi','Panjang Bayi','Berat Badan','Tinggi Badan']
             
             # Memastikan semua kolom ada
             if not all(col in data.columns for col in expected_columns):
-                flash('Format CSV tidak sesuai. Harus mengandung kolom: Jenis Kelamin, Umur (bulan), Berat Bayi (kg), Panjang Bayi (cm), Berat Badan (kg), Tinggi Badan (cm).', 'error')
+                flash('Format CSV tidak sesuai. Harus mengandung kolom: Jenis Kelamin, Umur, Berat Bayi, Panjang Bayi, Berat Badan, Tinggi Badan.', 'error')
                 return render_template('kelompok.html', csv_available=False)
 
             # Memilih kolom yang dibutuhkan
@@ -87,12 +90,12 @@ def deteksi_csv():
             # Melakukan deteksi
             predictions = model.predict(data)
             data['Prediksi Stunting'] = ['Anak Mengalami Stunting' if pred == 1 else 'Anak Tidak Mengalami Stunting' for pred in predictions]
-
+            
             # Menyimpan hasil prediksi ke dalam file CSV di memori
-            output = BytesIO()  # Menggunakan BytesIO untuk mode biner
-            data.to_csv(output, index=False)
-            output.seek(0)  # Mengembalikan posisi file ke awal
-            csv_output = output  # Menyimpan hasil CSV ke variabel global
+            output = BytesIO()  
+            data.to_csv(output, index=False)  
+            output.seek(0)  
+            csv_output = output  
 
             # Mengembalikan ke halaman dengan tombol unduhan aktif
             return render_template('kelompok.html', csv_available=True)
