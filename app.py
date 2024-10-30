@@ -118,7 +118,7 @@ def download_csv():
         return "Tidak ada hasil prediksi untuk diunduh.", 400
 
     # Mengirim file CSV untuk diunduh
-    return send_file(csv_output, mimetype='text/csv', download_name='hasil_prediksi_stunting.csv', as_attachment=True)
+    return send_file(csv_output, mimetype='text/csv', download_name='hasil_deteksi_stunting.csv', as_attachment=True)
 
 if __name__ == '__main__':
     app.run(debug=True)
