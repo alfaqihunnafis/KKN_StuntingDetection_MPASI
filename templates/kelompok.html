@@ -33,9 +33,9 @@
           {% endif %}
         {% endwith %}
 
-        <!-- Tombol untuk mengunduh CSV hasil prediksi jika tersedia -->
+        <!-- Tombol untuk mengunduh CSV hasil deteksi jika tersedia -->
         {% if csv_available %}
-            <a href="{{ url_for('download_csv') }}" class="button download-btn">Unduh Hasil Prediksi CSV</a>
+            <a href="{{ url_for('download_csv') }}" class="button download-btn">Unduh Hasil Deteksi CSV</a>
         {% endif %}
     </div>
 </body>

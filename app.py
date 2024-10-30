@@ -15,7 +15,7 @@ app.secret_key = os.getenv('SECRET_KEY')
 filename = 'model/best_model_90.pkl'
 model = pickle.load(open(filename, 'rb'))
 
-# Variabel global untuk menyimpan hasil prediksi
+# Variabel global untuk menyimpan hasil deteksi
 csv_output = None
 
 @app.route('/')
@@ -54,7 +54,7 @@ def deteksi_individu():
             else:
                 output = 'Anak Tidak Mengalami Stunting'
             
-            return render_template('individu.html', deteksi_text=f'Prediksi: {output}')
+            return render_template('individu.html', deteksi_text=f'Deteksi: {output}')
         except Exception as e:
             return render_template('individu.html', deteksi_text=f'Error: {str(e)}')
     return render_template('individu.html')
@@ -91,9 +91,9 @@ def deteksi_csv():
             
             # Melakukan deteksi
             predictions = model.predict(data)
-            data['Prediksi Stunting'] = ['Anak Mengalami Stunting' if pred == 1 else 'Anak Tidak Mengalami Stunting' for pred in predictions]
+            data['Deteksi Stunting'] = ['Anak Mengalami Stunting' if pred == 1 else 'Anak Tidak Mengalami Stunting' for pred in predictions]
             
-            # Menyimpan hasil prediksi ke dalam file CSV di memori
+            # Menyimpan hasil deteksi ke dalam file CSV di memori
             output = BytesIO()  
             data.to_csv(output, index=False)  
             output.seek(0)  
@@ -115,7 +115,7 @@ def download_csv():
     global csv_output  # Menggunakan variabel global csv_output
     
     if csv_output is None:
-        return "Tidak ada hasil prediksi untuk diunduh.", 400
+        return "Tidak ada hasil deteksi untuk diunduh.", 400
 
     # Mengirim file CSV untuk diunduh
     return send_file(csv_output, mimetype='text/csv', download_name='hasil_deteksi_stunting.csv', as_attachment=True)
