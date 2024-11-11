@@ -89,6 +89,12 @@ def deteksi_csv():
             # Memilih kolom yang dibutuhkan
             data = data[expected_columns]
             
+            # Mengecek apakah ada data yang hilang
+            if data.isnull().values.any():
+                missing_count = data.isnull().sum().sum() 
+                flash(f'Terdapat {missing_count} nilai yang hilang dalam file CSV. Mohon lengkapi data sebelum diunggah.', 'error')
+                return render_template('kelompok.html', csv_available=False)
+            
             # Melakukan deteksi
             predictions = model.predict(data)
             data['Deteksi Stunting'] = ['Anak Mengalami Stunting' if pred == 1 else 'Anak Tidak Mengalami Stunting' for pred in predictions]
