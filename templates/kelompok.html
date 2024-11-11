@@ -13,7 +13,7 @@
               <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
             </svg> Kembali
         </a>
-        <div class="form-title">Unggah CSV untuk Deteksi Kelompok</div>
+        <div class="form-title">Silakan Unggah Berkas CSV</div>
         <form action="{{ url_for('deteksi_csv') }}" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="file">Unggah berkas CSV:</label>
@@ -21,6 +21,11 @@
             </div>
             <button type="submit">Deteksi</button>
         </form>
+
+        <!-- Tombol untuk mengunduh template CSV -->
+        <div class="template">
+          <p>Jika belum mempunyai template untuk deteksi kelompok, bisa unduh template <a href="{{ url_for('static', filename='template/template.csv') }}" class="download-link">disini</a>.</p>
+        </div>
 
         <!-- Menampilkan pesan flash jika ada -->
         {% with messages = get_flashed_messages(with_categories=true) %}
