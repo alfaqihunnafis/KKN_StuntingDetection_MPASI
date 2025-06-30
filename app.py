@@ -30,6 +30,10 @@ def individu():
 def kelompok():
     return render_template('kelompok.html')
 
+@app.route('/mpasi')
+def mpasi():
+    return render_template('mpasi.html')
+
 @app.route('/deteksi_individu', methods=['POST'])
 def deteksi_individu():
     if request.method == 'POST':

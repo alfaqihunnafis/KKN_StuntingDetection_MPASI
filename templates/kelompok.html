@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StuntingAlert!</title>
+    <title>Deteksi Stunting - Kelompok</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='iconstunting.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
@@ -13,7 +14,7 @@
               <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
             </svg> Kembali
         </a>
-        <div class="form-title">Silakan Unggah Berkas CSV</div>
+        <div class="form-title">Silakan Unggah Berkas Data CSV</div>
         <form action="{{ url_for('deteksi_csv') }}" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="file">Unggah berkas CSV:</label>

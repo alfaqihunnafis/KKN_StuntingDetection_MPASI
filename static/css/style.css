@@ -37,8 +37,8 @@ body {
     background-color: #FFFFFF;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    color: #3F51B5;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    color: #194067;
 }
 
 .content {
@@ -48,14 +48,77 @@ body {
     justify-content: center;
     margin: 20px;
     padding: 40px;
-    color: #3F51B5;
+    color: #194067;
+}
+
+.main-header {
+    width: 100%;
+    background-color: #ffffffcc; /* putih semi transparan */
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    border-bottom: 2px solid #194067; 
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* kiri dan kanan */
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.logo {
+    height: 40px;
+    width: auto;
+}
+
+.logo-text {
+    height: 50px; /* ukuran logo nama */
+    width: auto;
+}
+
+.mpasi-icon {
+    height: 1.5em; /* cocok dengan ukuran teks */
+    width: auto;
+    margin: auto; 
+    vertical-align: middle;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.header-button {
+    background-color: #EEAECA;
+    color: #194067;
+    padding: 8px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: 700;
+}
+
+.header-button:hover {
+    background-color: #e0356a;
+    color: #ffffff;
 }
 
 h1 {
     text-align: center;
     font-size: 2em;
     margin-bottom: 20px;
-    color: #3F51B5;
+    color: #194067;
 }
 
 form {
@@ -92,8 +155,8 @@ input[type="number"] {
     max-width: 200px; 
     border-radius: 10px;
     height: 30px;
-    border: 1px solid #3F51B5;
-    color: #3F51B5;
+    border: 1px solid #194067;
+    color: #194067;
 }
 
 input::placeholder {
@@ -107,7 +170,7 @@ input[type="radio"] {
 .unit {
     margin-left: 10px;
     font-size: 16px;
-    color: #3F51B5;
+    color: #194067;
     font-weight: bold;
 }
 
@@ -121,7 +184,7 @@ input[type="radio"] {
     border-radius: 15px;
     border: none; 
     background-color: #EEAECA; 
-    color: #E0356A; 
+    color: #194067; 
     font-weight: bold;
     cursor: pointer; 
     width: 100%;
@@ -161,14 +224,14 @@ footer {
     color: #333333;
     background-color: rgba(255, 249, 191, 0.5);;
     text-align: center; 
-    border-top: 2px solid #E0356A; 
+    border-top: 2px solid #194067; 
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
     font-size: 14px;
 }
 
 .disclaimer-title {
     font-weight: bold;
-    color: #E0356A;
+    color: #194067;
     display: flex;
     align-items: center;
     font-size: 18px;

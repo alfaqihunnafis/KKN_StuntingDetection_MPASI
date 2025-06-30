@@ -1,0 +1,181 @@
+body {
+  font-family: "Nunito Sans", sans-serif;
+  line-height: 1.8;
+  margin: 0; /* Reset margin default body */
+  padding: 0px;
+  background: linear-gradient(to bottom,  rgba(238,174,202,1) 0%, #ffffff 100%);
+  color: #567ca0;
+}
+
+
+.container {
+  max-width: 800px; /* Lebar maksimum konten */
+  margin: 30px auto; /* Tengah horizontal dan beri margin atas bawah */
+  background-color: #fff; /* Latar belakang putih untuk konten */
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Efek bayangan lembut */
+}
+
+.main-header {
+    width: 100vw; /* memastikan selebar viewport penuh */
+    padding: 10px 20px;
+    background-color: #ffffffcc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    border-bottom: 2px solid #194067;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* kiri dan kanan */
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.logo {
+    height: 40px;
+    width: auto;
+}
+
+.logo-text {
+    height: 50px; /* ukuran logo nama */
+    width: auto;
+}
+
+.stunting-icon {
+    height: 1.5em; /* cocok dengan ukuran teks */
+    width: auto;
+    margin: auto; 
+    vertical-align: middle;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.header-button {
+    background-color: #B9CADF;
+    color: #194067;
+    padding: 8px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    
+}
+
+.header-button:hover {
+    background-color: #e0356a;
+    color: #ffffff;
+}
+
+h1 {
+  font-family: "Playfair Display", serif;
+  text-align: center;
+  font-size: 3em;
+  color: #194067; 
+  margin-bottom: 10px;
+}
+
+.tagline {
+  font-style: italic;
+  text-align: center;
+  color: #567ca0; 
+  font-size: 1.1em;
+}
+
+.recipe-image {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.recipe-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+}
+
+.ingredients {
+  margin-bottom: 30px;
+  margin-left: 20px;
+}
+
+.ingredients h2,
+.instructions h2 {
+  font-family: "Poppins", sans-serif;
+  font-size: 2.2em;
+  color: #194067; /* Hijau lebih tua untuk subjudul */
+  border-bottom: 3px solid #d4edda; /* Garis bawah hijau muda */
+  padding-bottom: 10px;
+  margin-top: 0; /* Reset margin top default h2 */
+  margin-bottom: 15px;
+}
+
+.ingredients-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.ingredients-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee; /* Garis pemisah antar bahan */
+  color: #567ca0;
+  font-size: 1.1em;
+}
+
+.ingredients-list li:last-child {
+  border-bottom: none; /* Hilangkan garis bawah pada item terakhir */
+}
+
+.instructions {
+  margin-bottom: 30px;
+  margin-left: 20px;
+}
+
+.steps {
+  list-style-type: decimal;
+  padding-left: 25px;
+}
+
+.steps li {
+  padding: 10px 0;
+  border-bottom: 1px dashed #ccc; /* Garis putus-putus antar langkah */
+  color: #567ca0;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+
+.steps li:last-child {
+  border-bottom: none; /* Hilangkan garis bawah pada langkah terakhir */
+}
+
+footer {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  color: #567ca0;
+  font-size: 0.9em;
+}
+
+/* Efek Hover untuk List Bahan dan Langkah */
+.ingredients-list li:hover,
+.steps li:hover {
+  background-color: #f0fff0; /* Hijau sangat muda saat dihover */
+  border-radius: 5px;
+  padding-left: 15px;
+  transition: background-color 0.3s ease, padding-left 0.3s ease;
+}

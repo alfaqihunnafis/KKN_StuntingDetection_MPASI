@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resep Bubur Nasi MPASI</title>
+    <meta
+      name="description"
+      content="Resep sederhana dan lezat untuk membuat bubur nasi MPASI (Makanan Pendamping ASI) untuk bayi Anda."
+    />
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='iconmpasi.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylempasi.css') }}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="main-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <img src="{{ url_for('static', filename='template/logo.png') }}" alt="Logo" class="logo">
+                    <img src="{{ url_for('static', filename='template/logoname.png') }}" alt="Nama Logo" class="logo-text">
+                </div>
+                <div class="header-right">
+                    <a href="{{ url_for('index') }}" class="header-button">
+                        <img src="{{ url_for('static', filename='template/iconstunting.png') }}" alt="Icon Stunting" class="stunting-icon">
+                          Stunting
+                    </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+      <h1>Resep Bubur Nasi MPASI</h1>
+      <p class="tagline">Sajian lembut dan bergizi untuk si kecil.</p>
+      <section class="recipe-image">
+        <img
+          src="{{ url_for('static', filename='template/BuburNasi.jpeg') }}"
+          alt="Gambar Bubur Nasi MPASI yang lezat"
+          width="400"
+        />
+      </section>
+
+      <section class="ingredients">
+        <h2>Bahan-bahan:</h2>
+        <ul class="ingredients-list">
+          <li>
+            2 sendok makan beras putih (opsional: beras merah untuk variasi)
+          </li>
+          <li>250 ml air (atau kaldu tanpa garam untuk rasa alami)</li>
+        </ul>
+      </section>
+
+      <section class="instructions">
+        <h2>Cara Membuat:</h2>
+        <ol class="steps">
+          <li>Cuci beras hingga bersih.</li>
+          <li>
+            Masukkan beras dan air (atau kaldu) ke dalam mangkuk tahan panas
+            (misalnya stainless steel atau keramik kecil).
+          </li>
+          <li>
+            Letakkan mangkuk di dalam kukusan (panci pengukus), tutup rapat.
+          </li>
+          <li>
+            Kukus selama 45-60 menit atau hingga beras menjadi nasi yang sangat
+            lembut (seperti bubur padat).
+          </li>
+          <li>
+            Aduk nasi hingga rata. Jika teksturnya terlalu kental, tambahkan
+            sedikit air matang hangat dan aduk kembali.
+          </li>
+          <li>Biarkan hingga suhu aman sebelum disajikan kepada bayi Anda.</li>
+        </ol>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Resep MPASI Sederhana</p>
+    </footer>
+  </body>
+</html>
