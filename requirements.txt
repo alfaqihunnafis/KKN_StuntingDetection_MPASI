@@ -1,4 +1,4 @@
-﻿blinker==1.8.2
+blinker==1.8.2
 click==8.1.7
 colorama==0.4.6
 Flask==3.0.3
@@ -12,6 +12,7 @@ python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
 pytz==2024.1
 scikit-learn==1.5.1
+scipy==1.14.0
 setuptools==72.2.0
 six==1.16.0
 threadpoolctl==3.5.0
