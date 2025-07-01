@@ -1,0 +1,13 @@
+# Abaikan virtual environment jika ada
+.venv/
+venv/
+
+# Abaikan cache Python
+__pycache__/
+*.pyc
+
+# Abaikan file environment lokal
+.env
+
+# Anda juga bisa menambahkan file atau folder lain yang tidak relevan
+# misalnya folder berisi data mentah, notebook, dll.
