@@ -1,13 +1,24 @@
-# Abaikan virtual environment jika ada
+# Direktori virtual environment Python
 .venv/
 venv/
+env/
 
-# Abaikan cache Python
+# Cache Python dan file terkompilasi
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 
-# Abaikan file environment lokal
+# File environment lokal yang berisi rahasia
 .env
+.env.*
+!.env.example
 
-# Anda juga bisa menambahkan file atau folder lain yang tidak relevan
-# misalnya folder berisi data mentah, notebook, dll.
+# File spesifik sistem operasi
+.DS_Store
+Thumbs.db
+
+# Direktori hasil build atau cache dari tools lain
+/build
+/dist
+/.cache
